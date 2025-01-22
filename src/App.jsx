@@ -3,7 +3,7 @@ import Rhombus from './assets/components/Rhombus'
 import Banner from './assets/components/Banner'
 
 function App() {
-  const [logo, setLogo] = useState(null)
+  const [color, setColor] = useState('#000000')
 
   return (
     <div className="min-h-screen bg-gray-900 h-full">
@@ -13,11 +13,11 @@ function App() {
             <Banner />
           </div>
           <div className="space-y-4 bg-gray-800/50 p-6 border-gray-700 border-2 rounded-lg shadow-sm mt-6">
-            <h1 className="text-2xl text-white">Configurações</h1>
+            <h1 className="text-4xl text-white font-semibold">Configurações</h1>
             {/* config */}
             <div className="grid grid-cols-2">
-              <div>
-                <label >Cor do Cardápio</label>
+              <div className='space-y-4 grid grid-cols-1'>
+                <label className='text-white text-xl'>Cor do Cardápio</label>
                 <input type="color" />
               </div>
             </div>
