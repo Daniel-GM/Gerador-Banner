@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import './App.css'
 import Banner from './assets/components/Banner'
 
 function App() {

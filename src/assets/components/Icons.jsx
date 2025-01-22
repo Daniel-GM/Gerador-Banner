@@ -1,8 +1,9 @@
 import React from 'react'
 
-const Icons = ({ text }) => {
+const Icons = ({ text, icon }) => {
   return (
-    <div className='bg-blue-500 flex justify-center items-center'>
+    <div className='flex justify-start items-center pl-10'>
+        {icon}
         {text}
     </div>
   )
