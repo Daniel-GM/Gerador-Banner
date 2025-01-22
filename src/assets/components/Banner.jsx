@@ -18,11 +18,11 @@ const Banner = () => {
         ></div>
 
         <div className='grid grid-cols-2 absolute top-0 left-0 w-full h-full'>
-          <div className='bg-red-500'>
+          <div className=''>
             <Title />
             <GridIcons  />
           </div>
-          <div className='bg-emerald-500 relative'>
+          <div className='relative'>
             <Rhombus />
           </div>
         </div>
