@@ -3,14 +3,15 @@ import GridIcons from './GridIcons'
 import Title from './Title'
 import Rhombus from './Rhombus'
 
-const Banner = () => {
+const Banner = ({ color, options, image }) => {
+  console.log(image)
 
   return (
     <>
-      <img src='/header.png' alt='Banner' className='w-full h-full object-cover' />
+      {/* <img src='/header.png' alt='Banner' className='w-full h-full object-cover' /> */}
       <div
         className='w-[1280px] h-[333px] relative bg-cover bg-center'
-        style={{ backgroundImage: `linear-gradient(to top, #ffffff80, transparent), url("mercado.jpg")`, }}
+        style={{ backgroundImage: `linear-gradient(to top, #ffffff80, transparent), ${image ? `url(${image})` : 'url(/mercado.jpg)'}`}}
       >
         <div
           className='w-[1280px] h-[333px] bg-white'
@@ -19,8 +20,8 @@ const Banner = () => {
 
         <div className='grid grid-cols-2 absolute top-0 left-0 w-full h-full'>
           <div className=''>
-            <Title />
-            <GridIcons  />
+            <Title color={color} />
+            <GridIcons options={options} color={color} />
           </div>
           <div className='relative'>
             <Rhombus />
@@ -28,7 +29,6 @@ const Banner = () => {
         </div>
       </div>
     </>
-
   )
 }
 

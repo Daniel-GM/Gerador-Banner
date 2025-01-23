@@ -1,13 +1,12 @@
 import React from 'react'
 import Icons from './Icons'
 
-const GridIcons = () => {
+const GridIcons = ({ options, color }) => {
   return (
     <section className=' grid grid-cols-2 grid-rows-2 h-2/6'>
-        <Icons icon='+' text='Icon 1' />
-        <Icons icon='+' text='Icon 2' />
-        <Icons icon='+' text='Icon 3' />
-        <Icons icon='+' text='Icon 4' />
+      {options.map((option, index) => (
+        <Icons key={index} icon={option.icon} text={option.text} color={color} />
+      ))}
     </section>
   )
 }
