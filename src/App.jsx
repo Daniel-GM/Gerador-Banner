@@ -78,13 +78,15 @@ function App() {
                     <img
                       src={selectedImage}
                       alt='Imagem de Fundo Selecionada'
-                      className='w-full h-32 object-cover rounded-lg'
+                      className='w-full h-32 object-cover rounded-lg cursor-pointer'
+                      onClick={() => document.getElementById("bg-image").click()}
                     />
                   ) : (
                     <img
                       src='/mercado.jpg'
                       alt='Imagem de Fundo'
-                      className='w-full h-32 object-cover rounded-lg'
+                      className='w-full h-32 object-cover rounded-lg cursor-pointer'
+                      onClick={() => document.getElementById("bg-image").click()}
                     />
                   )}
                 </div>
