@@ -61,9 +61,9 @@ const iconsByCategory = {
     { value: 'mais', icon: '' },
     { value: 'reservas', icon: '' },
   ],
-}
+};
 
-const IconOptions = ({ onChange, id }) => {
+const IconOptions = ({ onChange, id, sugestion }) => {
   const [selectedIcon, setSelectedIcon] = useState(
     Object.values(iconsByCategory).flat()[0]
   )
@@ -93,7 +93,11 @@ const IconOptions = ({ onChange, id }) => {
           />
         </div>
         <div className="w-full flex flex-col justify-center items-center ml-2">
-          <label htmlFor="icon" className="text-white text-center text-xl">
+          <label 
+            htmlFor="icon" 
+            className="text-white text-center text-xl"
+            
+          >
             Ícone {id}
           </label>
           <select
@@ -117,6 +121,7 @@ const IconOptions = ({ onChange, id }) => {
             type="text"
             className="w-full gap-2 p-2 mt-2 rounded-lg border-2 border-gray-300"
             onChange={handleInputChange}
+            placeholder={sugestion}
           />
         </div>
       </div>

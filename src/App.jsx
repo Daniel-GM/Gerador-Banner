@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import Banner from './assets/components/Banner'
 import IconOptions from './assets/components/IconOptions'
+import { Placeholder } from 'react-select/animated';
 
 function App() {
   const [color, setColor] = useState('#097269')
@@ -41,12 +42,12 @@ function App() {
             <div className="grid grid-cols-2">
               <div className='space-y-4 grid grid-cols-1 bg-gray-900/50 p-6 border-gray-700 border-2 rounded-lg mx-2'>
                 <div className='grid grid-cols-2'>
-                  <IconOptions id={1} onChange={(data) => handleIconOptionChange(0, data)} />
-                  <IconOptions id={2} onChange={(data) => handleIconOptionChange(1, data)} />
+                  <IconOptions id={1} sugestion={"Ex: Pizza"} onChange={(data) => handleIconOptionChange(0, data)} />
+                  <IconOptions id={2} sugestion={"Ex: Refrigerante"} onChange={(data) => handleIconOptionChange(1, data)} />
                 </div>
                 <div className='grid grid-cols-2'>
-                  <IconOptions id={3} onChange={(data) => handleIconOptionChange(2, data)} />
-                  <IconOptions id={4} onChange={(data) => handleIconOptionChange(3, data)} />
+                  <IconOptions id={3} sugestion={"Ex: @SeuInstagram"} onChange={(data) => handleIconOptionChange(2, data)} />
+                  <IconOptions id={4} sugestion={"Ex: Local do restaurante"} onChange={(data) => handleIconOptionChange(3, data)} />
                 </div>
               </div>
               <div className='space-y-6 flex flex-col justify-start  bg-gray-900/50 p-6 border-gray-700 border-2 rounded-lg mx-2'>
