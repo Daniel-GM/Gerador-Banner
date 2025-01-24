@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import Banner from './assets/components/Banner'
 import IconOptions from './assets/components/IconOptions'
-import { Placeholder } from 'react-select/animated';
+import { toPng } from 'html-to-image'
 
 function App() {
   const [color, setColor] = useState('#097269')
@@ -29,12 +29,30 @@ function App() {
     })
   }
 
+  const handleDownload = () => {
+    toPng(document.getElementById('banner'))
+      .then((dataUrl) => {
+        const link = document.createElement('a')
+        link.download = 'cardapio.png'
+        link.href = dataUrl
+        link.click()
+      })
+      .catch((err) => {
+        console.error('Erro ao gerar a imagem:', err);
+      })
+  }
+
   return (
     <div className="min-h-screen bg-gray-900 h-full">
       <div className="container mx-auto p-6 h-full">
         <div className="grid grid-cols-1 h-full">
           <div className="space-y-4 bg-gray-800/50 p-6 border-gray-700 border-2 rounded-lg shadow-sm mt-6 grid justify-center items-center">
             <Banner color={color} options={iconOptions} image={selectedImage} />
+            <button
+              children="Baixar Banner"
+              className="bg-emerald-600 text-white p-4 rounded-lg mt-6"
+              onClick={handleDownload}
+            />
           </div>
           <div className="space-y-4 bg-gray-800/50 p-6 border-gray-700 border-2 rounded-lg shadow-sm mt-6">
             <h1 className="text-3xl text-white font-semibold">Configurações</h1>

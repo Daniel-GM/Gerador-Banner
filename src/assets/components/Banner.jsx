@@ -1,15 +1,13 @@
-import { useState } from 'react'
 import GridIcons from './GridIcons'
 import Title from './Title'
 import Rhombus from './Rhombus'
 
 const Banner = ({ color, options, image }) => {
-  console.log(image)
-
+  
   return (
     <>
-      {/* <img src='/header.png' alt='Banner' className='w-full h-full object-cover' /> */}
       <div
+        id="banner"
         className='w-[1280px] h-[333px] relative bg-cover bg-center'
         style={{ backgroundImage: `linear-gradient(to top, #ffffff80, transparent), ${image ? `url(${image})` : 'url(/mercado.jpg)'}`}}
       >
