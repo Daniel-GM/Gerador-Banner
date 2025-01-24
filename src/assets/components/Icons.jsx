@@ -6,7 +6,7 @@ const Icons = ({ text, icon, color }) => {
       {!icon  ? <div className='border-2 w-full h-4/6'></div> : null}
       {icon && (
         <img
-          src={`data:image/svg+xml;utf8,${icon}`}
+          src={icon}
           alt={text}
           className='w-[50px]'
         />
