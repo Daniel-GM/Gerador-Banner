@@ -2,10 +2,12 @@ import { useState } from 'react'
 import Banner from './assets/components/Banner'
 import IconOptions from './assets/components/IconOptions'
 import { toPng } from 'html-to-image'
+import SelectLogo from './assets/components/SelectLogo'
 
 function App() {
   const [color, setColor] = useState('#097269')
   const [selectedImage, setSelectedImage] = useState(null);
+  const [logoMenu, setLogoMenu] = useState('./menu-w.png');
   const [iconOptions, setIconOptions] = useState([
     { icon: '', text: '' },
     { icon: '', text: '' },
@@ -47,7 +49,7 @@ function App() {
       <div className="container mx-auto p-6 h-full">
         <div className="grid grid-cols-1 h-full">
           <div className="space-y-4 bg-gray-800/50 p-6 border-gray-700 border-2 rounded-lg shadow-sm mt-6 grid justify-center items-center">
-            <Banner color={color} options={iconOptions} image={selectedImage} />
+            <Banner color={color} options={iconOptions} image={selectedImage} menu={logoMenu} />
             <button
               children="Baixar Banner"
               className="bg-emerald-600 text-white p-4 rounded-lg mt-6"
@@ -58,6 +60,7 @@ function App() {
             <h1 className="text-3xl text-white font-semibold">Configurações</h1>
             {/* config */}
             <div className="grid grid-cols-2">
+              {/* left */}
               <div className='space-y-4 grid grid-cols-1 bg-gray-900/50 p-6 border-gray-700 border-2 rounded-lg mx-2'>
                 <div className='grid grid-cols-2'>
                   <IconOptions id={1} sugestion={"Ex: Pizza"} onChange={(data) => handleIconOptionChange(0, data)} />
@@ -68,6 +71,7 @@ function App() {
                   <IconOptions id={4} sugestion={"Ex: Local do restaurante"} onChange={(data) => handleIconOptionChange(3, data)} />
                 </div>
               </div>
+              {/* right */}
               <div className='space-y-6 flex flex-col justify-start  bg-gray-900/50 p-6 border-gray-700 border-2 rounded-lg mx-2'>
                 <div className='flex flex-col space-y-2'>
                   <label className='text-white text-xl'>Cor do Cardápio</label>
@@ -78,7 +82,7 @@ function App() {
                     onChange={(e) => setColor(e.target.value)}
                   />
                 </div>
-                <div className='flex flex-col  space-y-2'>
+                <div className='flex flex-col  space-y-4'>
                   <label className='text-white text-xl'>Imagem de Fundo</label>
                   <input
                     id="bg-image"
@@ -108,6 +112,7 @@ function App() {
                       onClick={() => document.getElementById("bg-image").click()}
                     />
                   )}
+                  <SelectLogo onChange={(image) => setLogoMenu(image)} /> 
                 </div>
               </div>
             </div>

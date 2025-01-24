@@ -2,7 +2,7 @@ import GridIcons from './GridIcons'
 import Title from './Title'
 import Rhombus from './Rhombus'
 
-const Banner = ({ color, options, image }) => {
+const Banner = ({ color, options, image, menu }) => {
 
   return (
     <>
@@ -16,6 +16,17 @@ const Banner = ({ color, options, image }) => {
           backgroundRepeat: 'no-repeat',
         }}
       >
+        <img 
+          src={menu}
+          alt='menu sigesis' 
+          className='absolute w-[200px] object-cover z-20' 
+          style={{
+            top: '2%',
+            left: '99%',
+            transform: 'translate(-100%, 0)',
+          }}
+        />
+
         <div
           className='w-[1280px] h-[333px] bg-white'
           style={{ clipPath: 'polygon(0 0, 55% 0, 92% 100%, 0% 100%)' }}
