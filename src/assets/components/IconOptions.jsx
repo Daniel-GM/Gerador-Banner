@@ -102,7 +102,7 @@ const IconOptions = ({ onChange, id, sugestion }) => {
             name="icon"
             className="w-full gap-2 p-2 mt-2 rounded-lg border-2 border-gray-300"
             value={selectedIcon.value}
-            onClick={(e) => handleChange(e.target.value)}
+            onChange={(e) => handleChange(e.target.value)}
           >
             {Object.entries(iconsByCategory).map(([category, icons]) => (
               <optgroup key={category} label={category}>
@@ -117,7 +117,7 @@ const IconOptions = ({ onChange, id, sugestion }) => {
           <input
             type="text"
             className="w-full gap-2 p-2 mt-2 rounded-lg border-2 border-gray-300"
-            onClick={handleInputChange}
+            onChange={handleInputChange}
             placeholder={sugestion}
           />
         </div>
