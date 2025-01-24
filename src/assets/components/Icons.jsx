@@ -11,7 +11,18 @@ const Icons = ({ text, icon, color }) => {
           className='w-[50px]'
         />
       )}
-      <span className='ml-2' style={{ color: color }}>{text}</span>
+      <span 
+        className='ml-2 text-clip text-wrap' 
+        style={{
+          color: color,
+          display: 'inline-block',
+          overflow: 'hidden',
+          whiteSpace: 'normal',
+          wordWrap: 'break-word',
+        }}
+      >
+        {text?.slice(0, 36)}
+      </span>
     </div>
   )
 }
