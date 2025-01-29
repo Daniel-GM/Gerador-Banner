@@ -50,7 +50,7 @@ const Banner = ({ color, options, image, menu }) => {
           <div className='grid grid-cols-2 absolute top-0 left-0 w-full h-full'>
             <div className=''>
               <Title color={color} />
-              <GridIcons options={options} color={color} />
+              <GridIcons options={options} />
             </div>
             <div className='relative'>
               <Rhombus />
