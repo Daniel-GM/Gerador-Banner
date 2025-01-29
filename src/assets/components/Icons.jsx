@@ -25,7 +25,7 @@ const Icons = ({ text, icon, color = "#000" }) => {
           lineHeight: '1',
         }}
       >
-        {text?.slice(0, 36)}
+        {text?.slice(0, 30)}
       </span>
     </div>
   )
