@@ -2,10 +2,14 @@
 export default {
   content: [
     "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}", // Inclui todos os arquivos JSX e TSX
+    "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {}, // Personalize aqui, se necessário
+    extend: {
+      fontFamily: {
+        poppins: ['Poppins', 'sans-serif'],
+      },  
+    },
   },
   plugins: [],
 };

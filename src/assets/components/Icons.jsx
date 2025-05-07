@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Icons = ({ text, icon, color = "#000" }) => {
+const Icons = ({ text, icon, color = "#000", maxLength }) => {
   return (
     <div className='flex justify-start items-center pl-10 w-11/12'>
       {!icon ? <div className='border-2 w-full h-4/6'></div> : null}
@@ -12,8 +12,9 @@ const Icons = ({ text, icon, color = "#000" }) => {
         />
       )}
       <span
-        className='ml-2 text-clip text-wrap'
+        className='ml-2 text-clip text-wrap ' 
         style={{
+          paddingBottom: '5px',
           color: color,
           display: 'inline-block',
           overflow: 'hidden',
@@ -25,7 +26,7 @@ const Icons = ({ text, icon, color = "#000" }) => {
           lineHeight: '1',
         }}
       >
-        {text?.slice(0, 30)}
+        {text?.slice(0, maxLength)}
       </span>
     </div>
   )

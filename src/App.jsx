@@ -5,9 +5,10 @@ import { toPng } from 'html-to-image'
 import SelectLogo from './assets/components/SelectLogo'
 
 function App() {
+  const maxLength = 36
   const [color, setColor] = useState('#097269')
-  const [selectedImage, setSelectedImage] = useState(null);
-  const [logoMenu, setLogoMenu] = useState('./menu-w.png');
+  const [selectedImage, setSelectedImage] = useState(null)
+  const [logoMenu, setLogoMenu] = useState('./menu-w.png')
   const [iconOptions, setIconOptions] = useState([
     { icon: '', text: '' },
     { icon: '', text: '' },
@@ -50,7 +51,7 @@ function App() {
         link.click()
       })
       .catch((err) => {
-        console.error('Erro ao gerar a imagem:', err);
+        console.error('Erro ao gerar a imagem:', err)
       })
       .finally(() => {
         bannerElement.style.width = originalStyle.width
@@ -77,12 +78,12 @@ function App() {
               {/* left */}
               <div className="space-y-4 grid grid-cols-1 bg-gray-900/50 p-6 border-gray-700 border-2 rounded-lg mx-2">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <IconOptions id={1} sugestion={"Ex: Pizza"} onChange={(data) => handleIconOptionChange(0, data)} />
-                  <IconOptions id={2} sugestion={"Ex: Refrigerante"} onChange={(data) => handleIconOptionChange(1, data)} />
+                  <IconOptions id={1} sugestion={"Ex: Pizza"} onChange={(data) => handleIconOptionChange(0, data)} maxLength={maxLength} />
+                  <IconOptions id={2} sugestion={"Ex: Refrigerante"} onChange={(data) => handleIconOptionChange(1, data)} maxLength={maxLength} />
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <IconOptions id={3} sugestion={"Ex: @SeuInstagram"} onChange={(data) => handleIconOptionChange(2, data)} />
-                  <IconOptions id={4} sugestion={"Ex: Local do restaurante"} onChange={(data) => handleIconOptionChange(3, data)} />
+                  <IconOptions id={3} sugestion={"Ex: @SeuInstagram"} onChange={(data) => handleIconOptionChange(2, data)} maxLength={maxLength} />
+                  <IconOptions id={4} sugestion={"Ex: Local do restaurante"} onChange={(data) => handleIconOptionChange(3, data)} maxLength={maxLength} />
                 </div>
               </div>
               {/* right */}

@@ -60,10 +60,11 @@ const iconsByCategory = {
   ],
 };
 
-const IconOptions = ({ onChange, id, sugestion }) => {
+const IconOptions = ({ onChange, id, sugestion, maxLength }) => {
   const [selectedIcon, setSelectedIcon] = useState(
     Object.values(iconsByCategory).flat()[0]
   )
+
   const [inputText, setInputText] = useState('')
 
   const handleChange = (value) => {
@@ -75,8 +76,11 @@ const IconOptions = ({ onChange, id, sugestion }) => {
   }
 
   const handleInputChange = (e) => {
-    setInputText(e.target.value)
-    onChange({ icon: selectedIcon.icon, text: e.target.value })
+    const value = e.target.value
+    if ( value.length <= maxLength) {
+      setInputText(value)
+      onChange({ icon: selectedIcon.icon, text: e.target.value })
+    }
   }
 
   return (
@@ -90,10 +94,10 @@ const IconOptions = ({ onChange, id, sugestion }) => {
           />
         </div>
         <div className="w-full flex flex-col justify-center items-center ml-2">
-          <label 
-            htmlFor="icon" 
+          <label
+            htmlFor="icon"
             className="text-white text-center text-xl"
-            
+
           >
             Ícone {id}
           </label>
@@ -116,10 +120,14 @@ const IconOptions = ({ onChange, id, sugestion }) => {
           </select>
           <input
             type="text"
-            className="w-full gap-2 p-2 mt-2 rounded-lg border-2 border-gray-300"
+            className="w-full gap-2 p-2 mt-2 rounded-lg border-2 border-gray-300 font-poppins"
             onChange={handleInputChange}
             placeholder={sugestion}
+            value={inputText}
           />
+          <p className={`${inputText.length >= maxLength ? 'text-red-500' : 'text-gray-500'} text-sm mt-1`}>
+            {inputText.length} / {maxLength} caracteres
+          </p>
         </div>
       </div>
     </div>

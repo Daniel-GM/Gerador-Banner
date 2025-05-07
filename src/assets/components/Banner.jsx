@@ -23,12 +23,15 @@ const Banner = ({ color, options, image, menu }) => {
       <div id='divOverflow' className='overflow-auto w-full h-full'>
         <div
           id="banner"
-          className='w-[1280px] h-[333px] relative bg-cover bg-center'
+          className="w-[1280px] h-[333px] relative bg-cover bg-center font-poppins"
           style={{
-            backgroundImage: `linear-gradient(to top, #ffffff80, transparent), ${image ? `url(${image})` : 'url(/mercado.jpg)'}`,
+            backgroundImage: `linear-gradient(to top, #ffffff80, transparent), ${
+              image ? `url(${image})` : 'url(/mercado.jpg)'
+            }`,
             backgroundSize: '50% 100%',
             backgroundPosition: 'right',
             backgroundRepeat: 'no-repeat',
+            fontFamily: 'Poppins, sans-serif',
           }}
         >
           <img
