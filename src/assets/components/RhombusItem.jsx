@@ -1,10 +1,16 @@
 const RhombusItem = ({ config, imageRhombus, handleImageChange }) => {
 
-  console.log("config", config)
-
   return (
     <div className='tag-wrap'>
-      <div className={`rhombus absolute top-[${config.top}] left-[${config.left}] w-${config.sizeFather} h-${config.sizeFather} flex items-center justify-center`}>
+      <div
+        className={`rhombus absolute flex items-center justify-center`}
+        style={{
+          top: config.top,
+          left: config.left,
+          width: config.sizeFather,
+          height: config.sizeFather
+        }}
+      >
         <input
           id={config.id}
           type="file"
@@ -13,13 +19,15 @@ const RhombusItem = ({ config, imageRhombus, handleImageChange }) => {
         />
         <div
           onClick={() => document.getElementById(config.id).click()}
-          className={`rhombus relative cursor-pointer w-${config.sizeChildren} h-${config.sizeChildren}`}
+          className={`rhombus relative cursor-pointer`}
           style={{
             backgroundImage: imageRhombus[config.id]
               ? `url(${imageRhombus[config.id]})`
               : "none",
             backgroundSize: "cover",
             backgroundPosition: "center",
+            width: config.sizeChildren,
+            height: config.sizeChildren
           }}
         >
           {!imageRhombus[config.id] && (

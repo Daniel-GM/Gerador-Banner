@@ -4,10 +4,10 @@ import RhombusItem from './RhombusItem'
 
 const Rhombus = () => {
   const RHOMBUS_CONFIG = [
-    { id: 'rhombus1', top: '0px', left: '65px', sizeFather: '40', sizeChildren: '36',  },
-    { id: 'rhombus2', top: '130px', left: '-8px', sizeFather: '44', sizeChildren: '40',  },
-    { id: 'rhombus3', top: '20px', left: '180px', sizeFather: '72', sizeChildren: '64',  },
-    { id: 'rhombus4', top: '175px', left: '415px', sizeFather: '36', sizeChildren: '32',  }
+    { id: 'rhombus1', top: '0px', left: '65px', sizeFather: '10rem', sizeChildren: '9rem',  },
+    { id: 'rhombus2', top: '130px', left: '-8px', sizeFather: '11rem', sizeChildren: '10rem',  },
+    { id: 'rhombus3', top: '20px', left: '180px', sizeFather: '18rem', sizeChildren: '16rem',  },
+    { id: 'rhombus4', top: '175px', left: '415px', sizeFather: '9rem', sizeChildren: '8rem',  }
   ]
 
   const [imageRhombus, setImageRhombus] = useState({
@@ -30,11 +30,11 @@ const Rhombus = () => {
 
   return (
     <>
-      {/* {RHOMBUS_CONFIG.map((config, index) => (
+      {RHOMBUS_CONFIG.map((config, index) => (
         <RhombusItem key={index} config={config} imageRhombus={imageRhombus} handleImageChange={handleImageChange} />
-      ))} */}
+      ))}
 
-      <div className='tag-wrap'>
+      {/* <div className='tag-wrap'>
         <div className='rhombus absolute top-[0px] left-[65px] w-40 h-40 flex items-center justify-center'>
           <input
             id="rhombus1"
@@ -144,7 +144,7 @@ const Rhombus = () => {
             )}
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   )
 }
