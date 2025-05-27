@@ -3,7 +3,7 @@ import GridIcons from './GridIcons'
 import Title from './Title'
 import Rhombus from './Rhombus'
 
-const Banner = ({ color, options, image, menu }) => {
+const Banner = ({ color, options, image, menu, linearGradient, transparent }) => {
   const [isOverflowing, setIsOverflowing] = useState(false)
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const Banner = ({ color, options, image, menu }) => {
           id="banner"
           className="w-[1280px] h-[333px] relative bg-cover bg-center font-poppins"
           style={{
-            backgroundImage: `linear-gradient(to top, #ffffff80, transparent), ${
+            backgroundImage: `linear-gradient(to top, ${linearGradient}${transparent}, transparent), ${
               image ? `url(${image})` : 'url(/mercado.jpg)'
             }`,
             backgroundSize: '50% 100%',

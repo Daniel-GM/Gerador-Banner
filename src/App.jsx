@@ -1,14 +1,19 @@
+
 import { useState } from 'react'
 import Banner from './assets/components/Banner'
 import IconOptions from './assets/components/IconOptions'
 import { toPng } from 'html-to-image'
 import SelectLogo from './assets/components/SelectLogo'
 import ColorMenu from './assets/components/ColorMenu'
+import ColorGradient from './assets/components/ColorGradient'
+import TransparentGradient from './assets/components/TransparentGradient'
 
 function App() {
   const maxLength = 36
   const [color, setColor] = useState('#097269')
   const [selectedImage, setSelectedImage] = useState(null)
+  const [linearGradient, setLinearGradient] = useState('#ffffff')
+  const [transparentGradient, setTransparentGradient] = useState('80')
   const [logoMenu, setLogoMenu] = useState('./menu-w.png')
   const [iconOptions, setIconOptions] = useState([
     { id: 1, icon: '', text: '', sugestion: "Ex: Pizza" },
@@ -17,12 +22,22 @@ function App() {
     { id: 4, icon: '', text: '', sugestion: "Ex: Local do restaurante" }
   ])
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0]
+  const handleImageChange = (e) => {
+    const file = e.target.files[0]
     if (file) {
       const imageUrl = URL.createObjectURL(file)
       setSelectedImage(imageUrl)
     }
+  }
+
+  const handleGradientChange = (e) => {
+    setLinearGradient(e)
+  }
+
+  const handleTransparentGradientChange = (e) => { 
+    const value = Math.round(e)
+    const hex = value.toString(16).padStart(2, '0')
+    setTransparentGradient(hex)
   }
 
   const handleIconOptionChange = (index, { icon, text }) => {
@@ -70,7 +85,7 @@ function App() {
         <div className="grid grid-cols-1 h-full">
           {/* Banner */}
           <div className="space-y-4 bg-gray-800/50 p-6 border-gray-700 border-2 rounded-lg shadow-sm mt-6 grid justify-center items-center">
-            <Banner color={color} options={iconOptions} image={selectedImage} menu={logoMenu} />
+            <Banner color={color} options={iconOptions} image={selectedImage} menu={logoMenu} linearGradient={linearGradient} transparent={transparentGradient} />
             <button
               children="Baixar Banner"
               className="bg-emerald-600 text-white p-4 rounded-lg mt-6"
@@ -100,17 +115,21 @@ function App() {
               </div>
               {/* Right */}
               <div className="flex flex-col bg-gray-900/50 p-6 border-gray-700 border-2 rounded-lg gap-6">
-                {/* Color title and logo menu (sigesis) */}
-                <div className="flex flex-row space-y-2 items-end gap-6">
-                  {[
-                    <ColorMenu color={color} handleColorMenuChange={handleColorMenuChange} />,
-                    <SelectLogo onChange={(image) => setLogoMenu(image)} />
-                  ].map((component, index) => (
-                    <div key={index} className='flex flex-col w-full space-y-2'>
-                      {component}
-                    </div>
-                  ))}
-                </div>
+                {/* Color title, logo menu (sigesis) and Linear gradient */}
+                {[0, 1].map((rowIndex) => (
+                  <div key={rowIndex} className="flex flex-col md:flex-row mb-4 gap-6">
+                    {[
+                      <ColorMenu color={color} handleColorMenuChange={handleColorMenuChange} />,
+                      <SelectLogo onChange={(image) => setLogoMenu(image)} />,
+                      <ColorGradient color={linearGradient} setLinear={handleGradientChange} />,
+                      <TransparentGradient transparent={transparentGradient} setTransparent={handleTransparentGradientChange} />
+                    ].slice(rowIndex * 2, rowIndex * 2 + 2).map((component, index) => (
+                      <div key={index} className='flex flex-col w-full gap-2'>
+                        {component}
+                      </div>
+                    ))}
+                  </div>
+                ))}
                 {/* Background Image */}
                 <div className="flex flex-col space-y-4">
                   <label className="text-white text-2xl">Imagem de Fundo</label>
@@ -150,7 +169,7 @@ function App() {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 

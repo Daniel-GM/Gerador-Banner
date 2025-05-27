@@ -8,3 +8,18 @@
   font-weight: 400;
   font-display: swap;
 }
+
+.inputStyle {
+  -webkit-appearance: none;
+  -moz-appearance: none;  
+  appearance: none;
+  background-color: transparent;
+  width: 200px;
+  height: 30px;
+  border: none;
+  cursor: pointer;
+}
+
+.inputStyle::-webkit-color-swatch {
+  border-radius: 200px;
+}
