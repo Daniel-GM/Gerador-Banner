@@ -3,6 +3,7 @@ import Banner from './assets/components/Banner'
 import IconOptions from './assets/components/IconOptions'
 import { toPng } from 'html-to-image'
 import SelectLogo from './assets/components/SelectLogo'
+import ColorMenu from './assets/components/ColorMenu'
 
 function App() {
   const maxLength = 36
@@ -10,10 +11,10 @@ function App() {
   const [selectedImage, setSelectedImage] = useState(null)
   const [logoMenu, setLogoMenu] = useState('./menu-w.png')
   const [iconOptions, setIconOptions] = useState([
-    { icon: '', text: '' },
-    { icon: '', text: '' },
-    { icon: '', text: '' },
-    { icon: '', text: '' }
+    { id: 1, icon: '', text: '', sugestion: "Ex: Pizza" },
+    { id: 2, icon: '', text: '', sugestion: "Ex: Refrigerante" },
+    { id: 3, icon: '', text: '', sugestion: "Ex: @SeuInstagram" },
+    { id: 4, icon: '', text: '', sugestion: "Ex: Local do restaurante" }
   ])
 
   const handleImageChange = (event) => {
@@ -59,10 +60,15 @@ function App() {
       })
   }
 
+  const handleColorMenuChange = (newColor) => {
+    setColor(newColor)
+  }
+
   return (
     <div className="min-h-screen bg-gray-900 h-full">
       <div className="container mx-auto p-6 h-full">
         <div className="grid grid-cols-1 h-full">
+          {/* Banner */}
           <div className="space-y-4 bg-gray-800/50 p-6 border-gray-700 border-2 rounded-lg shadow-sm mt-6 grid justify-center items-center">
             <Banner color={color} options={iconOptions} image={selectedImage} menu={logoMenu} />
             <button
@@ -71,34 +77,43 @@ function App() {
               onClick={handleDownload}
             />
           </div>
+
+          {/* Config */}
           <div className="space-y-4 bg-gray-800/50 p-6 border-gray-700 border-2 rounded-lg shadow-sm mt-6">
             <h1 className="text-3xl text-white font-semibold">Configurações</h1>
-            {/* config */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              {/* left */}
-              <div className="space-y-4 grid grid-cols-1 bg-gray-900/50 p-6 border-gray-700 border-2 rounded-lg mx-2">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <IconOptions id={1} sugestion={"Ex: Pizza"} onChange={(data) => handleIconOptionChange(0, data)} maxLength={maxLength} />
-                  <IconOptions id={2} sugestion={"Ex: Refrigerante"} onChange={(data) => handleIconOptionChange(1, data)} maxLength={maxLength} />
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <IconOptions id={3} sugestion={"Ex: @SeuInstagram"} onChange={(data) => handleIconOptionChange(2, data)} maxLength={maxLength} />
-                  <IconOptions id={4} sugestion={"Ex: Local do restaurante"} onChange={(data) => handleIconOptionChange(3, data)} maxLength={maxLength} />
-                </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Left */}
+              <div className="space-y-4 grid grid-cols-1 bg-gray-900/50 p-6 border-gray-700 border-2 rounded-lg">
+                {[0, 1].map((rowIndex) => (
+                  <div key={rowIndex} className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {iconOptions.slice(rowIndex * 2, rowIndex * 2 + 2).map((item, index) => (
+                      <IconOptions
+                        key={index}
+                        id={rowIndex * 2 + index + 1}
+                        sugestion={item.sugestion}
+                        onChange={(data) => handleIconOptionChange(rowIndex * 2 + index, data)}
+                        maxLength={maxLength}
+                      />
+                    ))}
+                  </div>
+                ))}
               </div>
-              {/* right */}
-              <div className="space-y-6 flex flex-col justify-start bg-gray-900/50 p-6 border-gray-700 border-2 rounded-lg mx-2">
-                <div className="flex flex-col space-y-2">
-                  <label className="text-white text-xl">Cor do Cardápio</label>
-                  <input
-                    type="color"
-                    value={color}
-                    className="rounded-lg border-2 w-full border-gray-300"
-                    onChange={(e) => setColor(e.target.value)}
-                  />
+              {/* Right */}
+              <div className="flex flex-col bg-gray-900/50 p-6 border-gray-700 border-2 rounded-lg gap-6">
+                {/* Color title and logo menu (sigesis) */}
+                <div className="flex flex-row space-y-2 items-end gap-6">
+                  {[
+                    <ColorMenu color={color} handleColorMenuChange={handleColorMenuChange} />,
+                    <SelectLogo onChange={(image) => setLogoMenu(image)} />
+                  ].map((component, index) => (
+                    <div key={index} className='flex flex-col w-full space-y-2'>
+                      {component}
+                    </div>
+                  ))}
                 </div>
+                {/* Background Image */}
                 <div className="flex flex-col space-y-4">
-                  <label className="text-white text-xl">Imagem de Fundo</label>
+                  <label className="text-white text-2xl">Imagem de Fundo</label>
                   <input
                     id="bg-image"
                     type="file"
@@ -107,7 +122,7 @@ function App() {
                     onChange={handleImageChange}
                   />
                   <div
-                    className="bg-white w-full h-16 rounded-lg text-center flex justify-center items-center cursor-pointer"
+                    className="bg-white w-full h-12 rounded-lg text-center flex justify-center items-center cursor-pointer"
                     onClick={() => document.getElementById("bg-image").click()}
                   >
                     <label htmlFor="bg-image" className="text-gray-800">
@@ -129,7 +144,6 @@ function App() {
                       onClick={() => document.getElementById("bg-image").click()}
                     />
                   )}
-                  <SelectLogo onChange={(image) => setLogoMenu(image)} />
                 </div>
               </div>
             </div>

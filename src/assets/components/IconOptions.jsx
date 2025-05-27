@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 const iconsByCategory = {
   'Alimentos': [
-    { value: 'carnes', icon: './alimentos/carne.png' },
+    { value: 'carnes', icon: './alimentos/carne.png' }, 
     { value: 'churrasco', icon: './alimentos/churrasco.png' },
     { value: 'doce', icon: './alimentos/doce.png' },
     { value: 'frutos do mar', icon: './alimentos/frutos do mar.png' },
@@ -76,8 +76,8 @@ const IconOptions = ({ onChange, id, sugestion, maxLength }) => {
   }
 
   const handleInputChange = (e) => {
-    const value = e.target.value
-    if ( value.length <= maxLength) {
+    const value = e.target.value || ''
+    if (value.length <= maxLength) {
       setInputText(value)
       onChange({ icon: selectedIcon.icon, text: e.target.value })
     }
@@ -96,10 +96,10 @@ const IconOptions = ({ onChange, id, sugestion, maxLength }) => {
         <div className="w-full flex flex-col justify-center items-center ml-2">
           <label
             htmlFor="icon"
-            className="text-white text-center text-xl"
+            className="text-white text-center text-2xl"
 
           >
-            Ícone {id}
+            {`Ícone ${id}`}
           </label>
           <select
             id="icon"

@@ -7,19 +7,16 @@ const SelectLogo = ({ onChange }) => {
     const color = event.target.value === 'white' ? './menu-w.png' : './menu-b.png'
     setSelectedImage(event.target.value)
     onChange(color)
-
-
   }
 
   return (
-    <div className="mb-4 space-y-2">
-      <label className='text-white text-2xl '>Cor menu</label>
+    <>
+      <label className='text-white text-2xl flex-1'>Cor menu</label>
       <div className="flex gap-4">
         {/* Botão Branco */}
         <label
           htmlFor="white"
-          className={`w-7 h-7 rounded-full border-2 ${selectedImage === 'white' ? 'border-emerald-600' : 'border-gray-700'
-            } cursor-pointer bg-white`}
+          className={`w-7 h-7 rounded-full border-2 ${selectedImage === 'white' ? 'border-emerald-600' : 'border-gray-700'} cursor-pointer bg-white`}
         ></label>
         <input
           id="white"
@@ -45,7 +42,7 @@ const SelectLogo = ({ onChange }) => {
           onChange={handleImageChange}
         />
       </div>
-    </div>
+    </>
   )
 }
 
