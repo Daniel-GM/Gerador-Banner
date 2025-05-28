@@ -55,7 +55,7 @@ const Banner = ({ color, options, image, menu, linearGradient, transparent, rhom
               <Title color={color} />
               <GridIcons options={options} />
             </div>
-            <div className='relative'>
+            <div className='tag-wrap relative'>
               <Rhombus rhombusConfig={rhombusConfig} imageRhombus={imageRhombus} setImageRhombus={setImageRhombus} />
             </div>
           </div>

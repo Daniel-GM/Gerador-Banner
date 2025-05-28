@@ -1,3 +1,4 @@
+import './index.css'
 
 import { useState } from 'react'
 import Banner from './assets/components/Banner'
@@ -7,6 +8,7 @@ import SelectLogo from './assets/components/SelectLogo'
 import ColorMenu from './assets/components/ColorMenu'
 import ColorGradient from './assets/components/ColorGradient'
 import TransparentGradient from './assets/components/TransparentGradient'
+import RhombusConfig from './assets/components/RhombusConfig'
 
 function App() {
   const maxLength = 36
@@ -23,12 +25,12 @@ function App() {
     { id: 4, icon: '', text: '', sugestion: "Ex: Local do restaurante" }
   ])
 
-  const RHOMBUS_CONFIG = [
-    { id: 'rhombus1', top: '0px', left: '65px', sizeFather: '10rem', sizeChildren: '9rem', },
-    { id: 'rhombus2', top: '130px', left: '-8px', sizeFather: '11rem', sizeChildren: '10rem', },
-    { id: 'rhombus3', top: '20px', left: '180px', sizeFather: '18rem', sizeChildren: '16rem', },
-    { id: 'rhombus4', top: '175px', left: '415px', sizeFather: '9rem', sizeChildren: '8rem', }
-  ]
+  const [rhombusArray, setRhombusArray] = useState([
+    { id: 'rhombus1', top: '0px', left: '65px', sizeFather: '10rem', sizeChildren: '9rem', positionX: '50%', positionY: '50%'},
+    { id: 'rhombus2', top: '130px', left: '-8px', sizeFather: '11rem', sizeChildren: '10rem', positionX: '50%', positionY: '50%'},
+    { id: 'rhombus3', top: '20px', left: '180px', sizeFather: '18rem', sizeChildren: '16rem', positionX: '50%', positionY: '50%'},
+    { id: 'rhombus4', top: '175px', left: '415px', sizeFather: '9rem', sizeChildren: '8rem', positionX: '50%', positionY: '50%'}
+  ])
 
   const [imageRhombus, setImageRhombus] = useState({
     rhombus1: null,
@@ -36,6 +38,14 @@ function App() {
     rhombus3: null,
     rhombus4: null,
   })
+
+  const handlePositionChange = (index, newX, newY) => {
+    console.log([...rhombusArray], index, "x:", newX, " y:", newY)
+    const updated = rhombusArray.map((item) => 
+      item.id === index ? { ...item, positionX: newX, positionY: newY } : item
+    )
+    setRhombusArray(updated)
+  }
 
   const handleImageRhombusChange = (event, rhombusKey) => {
     const file = event.target.files[0]
@@ -60,7 +70,7 @@ function App() {
     setLinearGradient(e)
   }
 
-  const handleTransparentGradientChange = (e) => { 
+  const handleTransparentGradientChange = (e) => {
     const value = Math.round(e)
     const hex = value.toString(16).padStart(2, '0')
     setTransparentGradient(hex)
@@ -111,7 +121,7 @@ function App() {
         <div className="grid grid-cols-1 h-full">
           {/* Banner */}
           <div className="space-y-4 bg-gray-800/50 p-6 border-gray-700 border-2 rounded-lg shadow-sm mt-6 grid justify-center items-center">
-            <Banner color={color} options={iconOptions} image={selectedImage} menu={logoMenu} linearGradient={linearGradient} transparent={transparentGradient} rhombusConfig={RHOMBUS_CONFIG} imageRhombus={imageRhombus} setImageRhombus={handleImageRhombusChange} />
+            <Banner color={color} options={iconOptions} image={selectedImage} menu={logoMenu} linearGradient={linearGradient} transparent={transparentGradient} rhombusConfig={rhombusArray} imageRhombus={imageRhombus} setImageRhombus={handleImageRhombusChange} />
             <button
               children="Baixar Banner"
               className="bg-emerald-600 text-white p-4 rounded-lg mt-6"
@@ -189,6 +199,14 @@ function App() {
                       onClick={() => document.getElementById("bg-image").click()}
                     />
                   )}
+                </div>
+              </div>
+            </div>
+            <div className="grid grid-cols-1 gap-8">
+              <div className="space-y-4 grid grid-cols-1 bg-gray-900/50 p-6 border-gray-700 border-2 rounded-lg">
+                <h1 className="text-3xl text-white font-semibold">Configuração das imagens</h1>
+                <div className='grid grid-cols-1 xl:grid-cols-2 gap-4'>
+                  <RhombusConfig rhombusConfig={rhombusArray} imageRhombus={imageRhombus} setImageRhombus={handleImageRhombusChange} setPosition={handlePositionChange} />
                 </div>
               </div>
             </div>
