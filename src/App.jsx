@@ -26,10 +26,10 @@ function App() {
   ])
 
   const [rhombusArray, setRhombusArray] = useState([
-    { id: 'rhombus1', top: '0px', left: '65px', sizeFather: '10rem', sizeChildren: '9rem', positionX: '50%', positionY: '50%'},
-    { id: 'rhombus2', top: '130px', left: '-8px', sizeFather: '11rem', sizeChildren: '10rem', positionX: '50%', positionY: '50%'},
-    { id: 'rhombus3', top: '20px', left: '180px', sizeFather: '18rem', sizeChildren: '16rem', positionX: '50%', positionY: '50%'},
-    { id: 'rhombus4', top: '175px', left: '415px', sizeFather: '9rem', sizeChildren: '8rem', positionX: '50%', positionY: '50%'}
+    { id: 'rhombus1', top: '0px', left: '65px', sizeFather: '10rem', sizeChildren: '9rem', positionX: '50%', positionY: '50%', sizeImage: 'cover', mode: 'cover' },
+    { id: 'rhombus2', top: '130px', left: '-8px', sizeFather: '11rem', sizeChildren: '10rem', positionX: '50%', positionY: '50%', sizeImage: 'cover', mode: 'cover' },
+    { id: 'rhombus3', top: '20px', left: '180px', sizeFather: '18rem', sizeChildren: '16rem', positionX: '50%', positionY: '50%', sizeImage: 'cover', mode: 'cover' },
+    { id: 'rhombus4', top: '175px', left: '415px', sizeFather: '9rem', sizeChildren: '8rem', positionX: '50%', positionY: '50%', sizeImage: 'cover', mode: 'cover' }
   ])
 
   const [imageRhombus, setImageRhombus] = useState({
@@ -39,22 +39,45 @@ function App() {
     rhombus4: null,
   })
 
+  const handleModeChange = (index, newObj) => {
+    const updated = rhombusArray.map((item) =>
+      item.id === index ? { ...item, sizeImage: newObj.sizeImage, mode: newObj.mode } : item
+    )
+    setRhombusArray(updated)
+  }
+
+  const handleSizeImageChange = (index, newSize) => {
+    const updated = rhombusArray.map((item) =>
+      item.id === index ? { ...item, sizeImage: newSize } : item
+    )
+    setRhombusArray(updated)
+  }
+
   const handlePositionChange = (index, newX, newY) => {
-    console.log([...rhombusArray], index, "x:", newX, " y:", newY)
-    const updated = rhombusArray.map((item) => 
+    const updated = rhombusArray.map((item) =>
       item.id === index ? { ...item, positionX: newX, positionY: newY } : item
     )
     setRhombusArray(updated)
   }
 
   const handleImageRhombusChange = (event, rhombusKey) => {
-    const file = event.target.files[0]
+    const file = event?.target?.files?.[0]
+
     if (file) {
       const imageUrl = URL.createObjectURL(file)
       setImageRhombus((prev) => ({
         ...prev,
         [rhombusKey]: imageUrl,
       }))
+    } else {
+      setImageRhombus((prev) => ({
+        ...prev,
+        [rhombusKey]: null,
+      }))
+    }
+
+    if (event?.target) {
+      event.target.value = null
     }
   }
 
@@ -206,7 +229,7 @@ function App() {
               <div className="space-y-4 grid grid-cols-1 bg-gray-900/50 p-6 border-gray-700 border-2 rounded-lg">
                 <h1 className="text-3xl text-white font-semibold">Configuração das imagens</h1>
                 <div className='grid grid-cols-1 xl:grid-cols-2 gap-4'>
-                  <RhombusConfig rhombusConfig={rhombusArray} imageRhombus={imageRhombus} setImageRhombus={handleImageRhombusChange} setPosition={handlePositionChange} />
+                  <RhombusConfig rhombusConfig={rhombusArray} imageRhombus={imageRhombus} setImageRhombus={handleImageRhombusChange} setPosition={handlePositionChange} setSize={handleSizeImageChange} setMode={handleModeChange} />
                 </div>
               </div>
             </div>

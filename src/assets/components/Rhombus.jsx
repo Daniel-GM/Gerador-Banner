@@ -28,12 +28,13 @@ const Rhombus = ({ rhombusConfig, imageRhombus, setImageRhombus }) => {
               backgroundImage: imageRhombus[config.id]
                 ? `url(${imageRhombus[config.id]})`
                 : "none",
-              backgroundSize: "cover",
+              backgroundSize: config.sizeImage,
+              backgroundRepeat: "no-repeat",
               backgroundPosition: "center",
               width: config.sizeChildren,
               height: config.sizeChildren,
               backgroundPositionX: config.positionX,
-              backgroundPositiony: config.positionY,
+              backgroundPositionY: config.positionY,
             }}
           >
             {!imageRhombus[config.id] && (
