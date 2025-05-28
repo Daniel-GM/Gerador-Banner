@@ -3,7 +3,7 @@ import GridIcons from './GridIcons'
 import Title from './Title'
 import Rhombus from './Rhombus'
 
-const Banner = ({ color, options, image, menu, linearGradient, transparent }) => {
+const Banner = ({ color, options, image, menu, linearGradient, transparent, rhombusConfig, imageRhombus, setImageRhombus }) => {
   const [isOverflowing, setIsOverflowing] = useState(false)
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const Banner = ({ color, options, image, menu, linearGradient, transparent }) =>
               <GridIcons options={options} />
             </div>
             <div className='relative'>
-              <Rhombus />
+              <Rhombus rhombusConfig={rhombusConfig} imageRhombus={imageRhombus} setImageRhombus={setImageRhombus} />
             </div>
           </div>
         </div>

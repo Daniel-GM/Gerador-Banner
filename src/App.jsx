@@ -15,12 +15,38 @@ function App() {
   const [linearGradient, setLinearGradient] = useState('#ffffff')
   const [transparentGradient, setTransparentGradient] = useState('80')
   const [logoMenu, setLogoMenu] = useState('./menu-w.png')
+
   const [iconOptions, setIconOptions] = useState([
     { id: 1, icon: '', text: '', sugestion: "Ex: Pizza" },
     { id: 2, icon: '', text: '', sugestion: "Ex: Refrigerante" },
     { id: 3, icon: '', text: '', sugestion: "Ex: @SeuInstagram" },
     { id: 4, icon: '', text: '', sugestion: "Ex: Local do restaurante" }
   ])
+
+  const RHOMBUS_CONFIG = [
+    { id: 'rhombus1', top: '0px', left: '65px', sizeFather: '10rem', sizeChildren: '9rem', },
+    { id: 'rhombus2', top: '130px', left: '-8px', sizeFather: '11rem', sizeChildren: '10rem', },
+    { id: 'rhombus3', top: '20px', left: '180px', sizeFather: '18rem', sizeChildren: '16rem', },
+    { id: 'rhombus4', top: '175px', left: '415px', sizeFather: '9rem', sizeChildren: '8rem', }
+  ]
+
+  const [imageRhombus, setImageRhombus] = useState({
+    rhombus1: null,
+    rhombus2: null,
+    rhombus3: null,
+    rhombus4: null,
+  })
+
+  const handleImageRhombusChange = (event, rhombusKey) => {
+    const file = event.target.files[0]
+    if (file) {
+      const imageUrl = URL.createObjectURL(file)
+      setImageRhombus((prev) => ({
+        ...prev,
+        [rhombusKey]: imageUrl,
+      }))
+    }
+  }
 
   const handleImageChange = (e) => {
     const file = e.target.files[0]
@@ -85,7 +111,7 @@ function App() {
         <div className="grid grid-cols-1 h-full">
           {/* Banner */}
           <div className="space-y-4 bg-gray-800/50 p-6 border-gray-700 border-2 rounded-lg shadow-sm mt-6 grid justify-center items-center">
-            <Banner color={color} options={iconOptions} image={selectedImage} menu={logoMenu} linearGradient={linearGradient} transparent={transparentGradient} />
+            <Banner color={color} options={iconOptions} image={selectedImage} menu={logoMenu} linearGradient={linearGradient} transparent={transparentGradient} rhombusConfig={RHOMBUS_CONFIG} imageRhombus={imageRhombus} setImageRhombus={handleImageRhombusChange} />
             <button
               children="Baixar Banner"
               className="bg-emerald-600 text-white p-4 rounded-lg mt-6"
