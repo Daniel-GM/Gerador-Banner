@@ -3,7 +3,7 @@ import GridIcons from './GridIcons'
 import Title from './Title'
 import Rhombus from './Rhombus'
 
-const Banner = ({ color, options, image, menu, linearGradient, transparent, rhombusConfig, imageRhombus, setImageRhombus }) => {
+const Banner = ({ color, options, image, menu, linearGradient, transparent, rhombusConfig, imageRhombus, setImageRhombus, colorRhombus }) => {
   const [isOverflowing, setIsOverflowing] = useState(false)
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const Banner = ({ color, options, image, menu, linearGradient, transparent, rhom
               <GridIcons options={options} />
             </div>
             <div className='tag-wrap relative'>
-              <Rhombus rhombusConfig={rhombusConfig} imageRhombus={imageRhombus} setImageRhombus={setImageRhombus} />
+              <Rhombus rhombusConfig={rhombusConfig} imageRhombus={imageRhombus} setImageRhombus={setImageRhombus} colorRhombus={colorRhombus} />
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import './Rhombus.css'
 
-const Rhombus = ({ rhombusConfig, imageRhombus, setImageRhombus }) => {
+const Rhombus = ({ rhombusConfig, imageRhombus, setImageRhombus, colorRhombus }) => {
 
   return (
     <>
@@ -9,6 +9,7 @@ const Rhombus = ({ rhombusConfig, imageRhombus, setImageRhombus }) => {
           key={key}
           className={`rhombus absolute flex items-center justify-center`}
           style={{
+            background: colorRhombus,
             top: config.top,
             left: config.left,
             width: config.sizeFather,

@@ -1,4 +1,4 @@
-const RhombusConfig = ({ rhombusConfig, imageRhombus, setImageRhombus, setPosition, setSize, setMode }) => {
+const RhombusConfig = ({ rhombusConfig, imageRhombus, setImageRhombus, setPosition, setSize, setMode, colorRhombus }) => {
 
   return (
     <>
@@ -8,6 +8,7 @@ const RhombusConfig = ({ rhombusConfig, imageRhombus, setImageRhombus, setPositi
             key={key}
             className={`rhombus flex items-center justify-center`}
             style={{
+              background: colorRhombus,
               top: key,
               left: config.left,
               width: config.sizeFather,

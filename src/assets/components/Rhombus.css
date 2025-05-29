@@ -7,7 +7,6 @@
   margin: calc(tan(22.5deg)*var(--r));
   clip-path: polygon(50% 0,100% 50%,50% 100%,0 50%) margin-box;
   mask:conic-gradient(#000 0 0) no-repeat 50%/var(--_s) var(--_s), top var(--_g) no-repeat space,left var(--_g) space no-repeat;
-  background: #fff;
 }
 
 .tag-wrap {

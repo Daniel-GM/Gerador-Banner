@@ -5,10 +5,9 @@ import Banner from './assets/components/Banner'
 import IconOptions from './assets/components/IconOptions'
 import { toPng } from 'html-to-image'
 import SelectLogo from './assets/components/SelectLogo'
-import ColorMenu from './assets/components/ColorMenu'
-import ColorGradient from './assets/components/ColorGradient'
 import TransparentGradient from './assets/components/TransparentGradient'
 import RhombusConfig from './assets/components/RhombusConfig'
+import ChangeColor from './assets/components/ChangeColor'
 
 function App() {
   const maxLength = 36
@@ -38,6 +37,12 @@ function App() {
     rhombus3: null,
     rhombus4: null,
   })
+
+  const [colorRhombus, setColorRhombus] = useState('#ffffff')
+
+  const handleColorRhombusChange = (newColor) => {
+    setColorRhombus(newColor)
+  }
 
   const handleModeChange = (index, newObj) => {
     const updated = rhombusArray.map((item) =>
@@ -144,7 +149,7 @@ function App() {
         <div className="grid grid-cols-1 h-full">
           {/* Banner */}
           <div className="space-y-4 bg-gray-800/50 p-6 border-gray-700 border-2 rounded-lg shadow-sm mt-6 grid justify-center items-center">
-            <Banner color={color} options={iconOptions} image={selectedImage} menu={logoMenu} linearGradient={linearGradient} transparent={transparentGradient} rhombusConfig={rhombusArray} imageRhombus={imageRhombus} setImageRhombus={handleImageRhombusChange} />
+            <Banner color={color} options={iconOptions} image={selectedImage} menu={logoMenu} linearGradient={linearGradient} transparent={transparentGradient} rhombusConfig={rhombusArray} imageRhombus={imageRhombus} setImageRhombus={handleImageRhombusChange} colorRhombus={colorRhombus} />
             <button
               children="Baixar Banner"
               className="bg-emerald-600 text-white p-4 rounded-lg mt-6"
@@ -178,10 +183,11 @@ function App() {
                 {[0, 1].map((rowIndex) => (
                   <div key={rowIndex} className="flex flex-col md:flex-row mb-4 gap-6">
                     {[
-                      <ColorMenu color={color} handleColorMenuChange={handleColorMenuChange} />,
+                      <ChangeColor color={color} setColor={handleColorMenuChange} label={"Cor do Cardápio"} />,
                       <SelectLogo onChange={(image) => setLogoMenu(image)} />,
-                      <ColorGradient color={linearGradient} setLinear={handleGradientChange} />,
+                      <ChangeColor color={linearGradient} setColor={handleGradientChange} label={"Cor do Gradiente"} />,
                       <TransparentGradient transparent={transparentGradient} setTransparent={handleTransparentGradientChange} />
+
                     ].slice(rowIndex * 2, rowIndex * 2 + 2).map((component, index) => (
                       <div key={index} className='flex flex-col w-full gap-2'>
                         {component}
@@ -227,9 +233,16 @@ function App() {
             </div>
             <div className="grid grid-cols-1 md:gap-8 gap-4">
               <div className="md:space-y-4 space-y-1 grid grid-cols-1 bg-gray-900/50 md:p-6 p-3 border-gray-700 border-2 rounded-lg">
-                <h1 className="text-3xl text-white font-semibold">Configuração das imagens</h1>
+                <h1 className="text-3xl text-white font-semibold">Configuração dos losangos</h1>
+                <div className='grid grid-cols-1 gap-4'>
+                  <div className="border-gray-700 border-2 p-1 md:p-2 rounded-lg bg-gray-900 grid grid-cols-1 md:grid-cols-2 justify-items-center items-center gap-4">
+                    <div className='flex flex-col items-center w-full gap-2'>
+                      <ChangeColor color={colorRhombus} setColor={handleColorRhombusChange} label={"Cor do Losango"} />
+                    </div>
+                  </div>
+                </div>
                 <div className='grid grid-cols-1 xl:grid-cols-2 gap-4'>
-                  <RhombusConfig rhombusConfig={rhombusArray} imageRhombus={imageRhombus} setImageRhombus={handleImageRhombusChange} setPosition={handlePositionChange} setSize={handleSizeImageChange} setMode={handleModeChange} />
+                  <RhombusConfig rhombusConfig={rhombusArray} imageRhombus={imageRhombus} setImageRhombus={handleImageRhombusChange} setPosition={handlePositionChange} setSize={handleSizeImageChange} setMode={handleModeChange} colorRhombus={colorRhombus} />
                 </div>
               </div>
             </div>
