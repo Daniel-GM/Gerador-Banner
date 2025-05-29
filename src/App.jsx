@@ -9,6 +9,7 @@ import TransparentGradient from './assets/components/TransparentGradient'
 import RhombusConfig from './assets/components/RhombusConfig'
 import ChangeColor from './assets/components/ChangeColor'
 import SelectPositionGradient from './assets/components/SelectPositionGradient'
+import InputRange from './assets/components/InputRange'
 
 function App() {
   // constants and states
@@ -18,6 +19,7 @@ function App() {
   const [linearGradient, setLinearGradient] = useState('#ffffff')
   const [transparentGradient, setTransparentGradient] = useState('80')
   const [logoMenu, setLogoMenu] = useState('./menu-w.png')
+  const [positionBackground, setPositionBackground] = useState({ size: 0, position: 0 })
   const [iconOptions, setIconOptions] = useState([
     { id: 1, icon: '', text: '', sugestion: "Ex: Pizza" },
     { id: 2, icon: '', text: '', sugestion: "Ex: Refrigerante" },
@@ -40,6 +42,18 @@ function App() {
   const [positionGradient, setPositionGradient] = useState('to top')
 
   // handlers
+  const handlePositionBackgroundChange = (newPosition) => {
+    setPositionBackground((prev) => (
+      { ...prev, position: newPosition }
+    ))
+  }
+
+  const handleSizeBackgroundChange = (newSize) => {
+    setPositionBackground((prev) => (
+      { ...prev, size: newSize }
+    ))
+  }
+
   const handleColorRhombusChange = (newColor) => {
     setColorRhombus(newColor)
   }
@@ -149,7 +163,7 @@ function App() {
         <div className="grid grid-cols-1 h-full">
           {/* Banner */}
           <div className="space-y-4 bg-gray-800/50 p-6 border-gray-700 border-2 rounded-lg shadow-sm mt-6 grid justify-center items-center">
-            <Banner color={color} options={iconOptions} image={selectedImage} menu={logoMenu} linearGradient={linearGradient} transparent={transparentGradient} rhombusConfig={rhombusArray} imageRhombus={imageRhombus} setImageRhombus={handleImageRhombusChange} colorRhombus={colorRhombus} positionGradient={positionGradient} />
+            <Banner color={color} options={iconOptions} image={selectedImage} menu={logoMenu} linearGradient={linearGradient} transparent={transparentGradient} rhombusConfig={rhombusArray} imageRhombus={imageRhombus} setImageRhombus={handleImageRhombusChange} colorRhombus={colorRhombus} positionGradient={positionGradient} positionBackground={positionBackground} />
             <button
               children="Baixar Banner"
               className="bg-emerald-600 text-white p-4 rounded-lg mt-6"
@@ -196,6 +210,7 @@ function App() {
                     ))}
                   </div>
                 ))}
+
                 {/* Background Image */}
                 <div className="flex flex-col space-y-4">
                   <label className="text-white text-2xl">Imagem de Fundo</label>
@@ -214,21 +229,11 @@ function App() {
                       Selecione uma Imagem
                     </label>
                   </div>
-                  {selectedImage ? (
-                    <img
-                      src={selectedImage}
-                      alt="Imagem de Fundo Selecionada"
-                      className="w-full h-32 object-cover rounded-lg cursor-pointer"
-                      onClick={() => document.getElementById("bg-image").click()}
-                    />
-                  ) : (
-                    <img
-                      src="/mercado.jpg"
-                      alt="Imagem de Fundo"
-                      className="w-full h-32 object-cover rounded-lg cursor-pointer"
-                      onClick={() => document.getElementById("bg-image").click()}
-                    />
-                  )}
+                  <Banner color={color} options={iconOptions} image={selectedImage} menu={logoMenu} linearGradient={linearGradient} transparent={transparentGradient} rhombusConfig={rhombusArray} imageRhombus={imageRhombus} setImageRhombus={handleImageRhombusChange} colorRhombus={colorRhombus} positionGradient={positionGradient} positionBackground={positionBackground} layout={"view"} />
+                  <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
+                    <InputRange value={positionBackground.size} setValue={handleSizeBackgroundChange} min={0} max={100} mode={"%"} label={"Largura:"} />
+                    <InputRange value={positionBackground.position} setValue={handlePositionBackgroundChange} min={0} max={100} mode={"%"} label={"Posição X:"} />
+                  </div>
                 </div>
               </div>
             </div>
@@ -236,7 +241,7 @@ function App() {
               <div className="md:space-y-4 space-y-1 grid grid-cols-1 bg-gray-900/50 md:p-6 p-3 border-gray-700 border-2 rounded-lg">
                 <h1 className="text-3xl text-white font-semibold">Configuração dos losangos</h1>
                 <div className='grid grid-cols-1 gap-4'>
-                  
+
                 </div>
                 <div className='grid grid-cols-1 xl:grid-cols-2 gap-4'>
                   <RhombusConfig rhombusConfig={rhombusArray} imageRhombus={imageRhombus} setImageRhombus={handleImageRhombusChange} setPosition={handlePositionChange} setSize={handleSizeImageChange} setMode={handleModeChange} colorRhombus={colorRhombus} />

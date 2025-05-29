@@ -3,7 +3,7 @@ import GridIcons from './GridIcons'
 import Title from './Title'
 import Rhombus from './Rhombus'
 
-const Banner = ({ color, options, image, menu, linearGradient, transparent, rhombusConfig, imageRhombus, setImageRhombus, colorRhombus, positionGradient }) => {
+const Banner = ({ color, options, image, menu, linearGradient, transparent, rhombusConfig, imageRhombus, setImageRhombus, colorRhombus, positionGradient, positionBackground, layout = "default" }) => {
   const [isOverflowing, setIsOverflowing] = useState(false)
 
   useEffect(() => {
@@ -22,13 +22,13 @@ const Banner = ({ color, options, image, menu, linearGradient, transparent, rhom
       )}
       <div id='divOverflow' className='overflow-auto w-full h-full'>
         <div
-          id="banner"
-          className="w-[1280px] h-[333px] relative bg-cover bg-center font-poppins"
+          id={layout === "default" ? "banner" : ""}
+          className={`${layout === "default" ? "w-[1280px] h-[333px]" : "w-[640px] h-[166.5px]"} relative bg-cover bg-center font-poppins`}
           style={{
             backgroundImage: `linear-gradient(${positionGradient}, ${linearGradient}${transparent}, transparent), ${image ? `url(${image})` : 'url(/mercado.jpg)'
               }`,
-            backgroundSize: '50% 100%',
-            backgroundPosition: 'right',
+            backgroundSize: `${parseInt(positionBackground.size) + 45}% 100%`,
+            backgroundPosition: `${parseInt(positionBackground.position) + 100}%`,
             backgroundRepeat: 'no-repeat',
             fontFamily: 'Poppins, sans-serif',
           }}
@@ -36,7 +36,7 @@ const Banner = ({ color, options, image, menu, linearGradient, transparent, rhom
           <img
             src={menu}
             alt='menu sigesis'
-            className='absolute w-[200px] object-cover z-20'
+            className={`absolute ${layout === "default" ? "w-[200px]" : "w-[100px]"} object-cover z-20`}
             style={{
               top: '2%',
               left: '99%',
@@ -45,18 +45,20 @@ const Banner = ({ color, options, image, menu, linearGradient, transparent, rhom
           />
 
           <div
-            className='w-[1280px] h-[333px] bg-white'
+            className={`${layout === "default" ? "w-[1280px] h-[333px]" : "w-[640px] h-[166.5px]"} bg-white`}
             style={{ clipPath: 'polygon(0 0, 55% 0, 92% 100%, 0% 100%)' }}
           ></div>
 
+          {layout === "default" && 
           <div className='grid grid-cols-2 absolute top-0 left-0 w-full h-full'>
             <div className=''>
-              <Title color={color} />
-              <GridIcons options={options} />
+              <Title color={color} layout={layout} />
+              <GridIcons options={options} layout={layout} />
             </div>
             <div className='tag-wrap relative'>
               {rhombusConfig.map((config, key) => (
                 <Rhombus 
+                  layout={layout}
                   key={key} 
                   config={config} 
                   imageRhombus={imageRhombus} 
@@ -66,6 +68,7 @@ const Banner = ({ color, options, image, menu, linearGradient, transparent, rhom
               ))}
             </div>
           </div>
+          }
         </div>
       </div>
     </>
