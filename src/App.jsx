@@ -140,7 +140,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-900 h-full">
-      <div className="container mx-auto p-6 h-full">
+      <div className="container mx-auto p-6 h-full md:w-auto w-full">
         <div className="grid grid-cols-1 h-full">
           {/* Banner */}
           <div className="space-y-4 bg-gray-800/50 p-6 border-gray-700 border-2 rounded-lg shadow-sm mt-6 grid justify-center items-center">
@@ -153,7 +153,7 @@ function App() {
           </div>
 
           {/* Config */}
-          <div className="space-y-4 bg-gray-800/50 p-6 border-gray-700 border-2 rounded-lg shadow-sm mt-6">
+          <div className="space-y-4 bg-gray-800/50 md:p-6 p-3 border-gray-700 border-2 rounded-lg shadow-sm mt-6">
             <h1 className="text-3xl text-white font-semibold">Configurações</h1>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               {/* Left */}
@@ -225,8 +225,8 @@ function App() {
                 </div>
               </div>
             </div>
-            <div className="grid grid-cols-1 gap-8">
-              <div className="space-y-4 grid grid-cols-1 bg-gray-900/50 p-6 border-gray-700 border-2 rounded-lg">
+            <div className="grid grid-cols-1 md:gap-8 gap-4">
+              <div className="md:space-y-4 space-y-1 grid grid-cols-1 bg-gray-900/50 md:p-6 p-3 border-gray-700 border-2 rounded-lg">
                 <h1 className="text-3xl text-white font-semibold">Configuração das imagens</h1>
                 <div className='grid grid-cols-1 xl:grid-cols-2 gap-4'>
                   <RhombusConfig rhombusConfig={rhombusArray} imageRhombus={imageRhombus} setImageRhombus={handleImageRhombusChange} setPosition={handlePositionChange} setSize={handleSizeImageChange} setMode={handleModeChange} />

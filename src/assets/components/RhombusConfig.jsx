@@ -1,9 +1,9 @@
 const RhombusConfig = ({ rhombusConfig, imageRhombus, setImageRhombus, setPosition, setSize, setMode }) => {
-  
+
   return (
     <>
       {rhombusConfig.map((config, key) => (
-        <div key={key} className="border-gray-700 border-2 p-2 rounded-lg bg-gray-900 grid grid-cols-1 md:grid-cols-2 justify-items-center items-center gap-4">
+        <div key={key} className="border-gray-700 border-2 p-1 md:p-2 rounded-lg bg-gray-900 grid grid-cols-1 md:grid-cols-2 justify-items-center items-center gap-4">
           <div
             key={key}
             className={`rhombus flex items-center justify-center`}
@@ -71,7 +71,7 @@ const RhombusConfig = ({ rhombusConfig, imageRhombus, setImageRhombus, setPositi
                 <span className="text-white text-center">{config.positionY}</span>
               </div>
             </div>
-            
+
             <div className="flex flex-col items-center gap-2 bg-gray-950/50 w-full p-4 rounded-lg border-2  border-gray-700">
               <span className="text-white">Tamanho da imagem</span>
               <div className="flex gap-4 items-center">
@@ -99,16 +99,18 @@ const RhombusConfig = ({ rhombusConfig, imageRhombus, setImageRhombus, setPositi
                 </div>
               )}
               {(config.mode === "px" || config.mode === "%") && (
-                <div className="flex gap-4 items-center">
+                <div className="flex flex-row xl:flex-col xl:gap-0 2xl:flex-row  gap-2 items-center">
                   <label className="text-white text-center">Tamanho:</label>
-                  <input
-                    type="range"
-                    min="0"
-                    max="1000"
-                    value={parseInt(config.sizeImage) || 100}
-                    onChange={(e) => setSize(config.id, e.target.value + config.mode)}
-                  />
-                  <span className="text-white text-center">{config.sizeImage}</span>
+                  <div className="flex items-center gap-2">
+                    <input
+                      type="range"
+                      min="0"
+                      max="1000"
+                      value={parseInt(config.sizeImage) || 100}
+                      onChange={(e) => setSize(config.id, e.target.value + config.mode)}
+                    />
+                    <span className="text-white text-center">{config.sizeImage}</span>
+                  </div>
                 </div>
               )}
             </div>
