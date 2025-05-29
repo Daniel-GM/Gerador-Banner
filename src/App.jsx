@@ -200,7 +200,7 @@ function App() {
                       <ChangeColor color={color} setColor={handleColorMenuChange} label={"Cor do Cardápio"} />,
                       <SelectLogo onChange={(image) => setLogoMenu(image)} />,
                       <ChangeColor color={linearGradient} setColor={handleGradientChange} label={"Cor do Gradiente"} />,
-                      <TransparentGradient transparent={transparentGradient} setTransparent={handleTransparentGradientChange} />,
+                      <InputRange value={transparentGradient} setValue={handleTransparentGradientChange} min={0} max={255} mode={""} label={"Transparência do Gradiente"} sistemaNumerico={"hexadecimal"} />,
                       <SelectPositionGradient position={positionGradient} setPosition={setPositionGradient} label={"Posição do Gradiente"} />,
                       <ChangeColor color={colorRhombus} setColor={handleColorRhombusChange} label={"Borda dos Losangos"} />,
                     ].slice(rowIndex * 2, rowIndex * 2 + 2).map((component, index) => (
@@ -231,8 +231,8 @@ function App() {
                   </div>
                   <Banner color={color} options={iconOptions} image={selectedImage} menu={logoMenu} linearGradient={linearGradient} transparent={transparentGradient} rhombusConfig={rhombusArray} imageRhombus={imageRhombus} setImageRhombus={handleImageRhombusChange} colorRhombus={colorRhombus} positionGradient={positionGradient} positionBackground={positionBackground} layout={"view"} />
                   <div className='grid grid-cols-1 md:grid-cols-2 gap-4'>
-                    <InputRange value={positionBackground.size} setValue={handleSizeBackgroundChange} min={0} max={100} mode={"%"} label={"Largura:"} />
-                    <InputRange value={positionBackground.position} setValue={handlePositionBackgroundChange} min={0} max={100} mode={"%"} label={"Posição X:"} />
+                    <InputRange value={positionBackground.size} setValue={handleSizeBackgroundChange} min={0} max={100} mode={"%"} label={"Largura"} />
+                    <InputRange value={positionBackground.position} setValue={handlePositionBackgroundChange} min={0} max={100} mode={"%"} label={"Posição X"} />
                   </div>
                 </div>
               </div>
