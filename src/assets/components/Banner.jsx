@@ -3,7 +3,7 @@ import GridIcons from './GridIcons'
 import Title from './Title'
 import Rhombus from './Rhombus'
 
-const Banner = ({ color, options, image, menu, linearGradient, transparent, rhombusConfig, imageRhombus, setImageRhombus, colorRhombus }) => {
+const Banner = ({ color, options, image, menu, linearGradient, transparent, rhombusConfig, imageRhombus, setImageRhombus, colorRhombus, positionGradient }) => {
   const [isOverflowing, setIsOverflowing] = useState(false)
 
   useEffect(() => {
@@ -25,9 +25,8 @@ const Banner = ({ color, options, image, menu, linearGradient, transparent, rhom
           id="banner"
           className="w-[1280px] h-[333px] relative bg-cover bg-center font-poppins"
           style={{
-            backgroundImage: `linear-gradient(to top, ${linearGradient}${transparent}, transparent), ${
-              image ? `url(${image})` : 'url(/mercado.jpg)'
-            }`,
+            backgroundImage: `linear-gradient(${positionGradient}, ${linearGradient}${transparent}, transparent), ${image ? `url(${image})` : 'url(/mercado.jpg)'
+              }`,
             backgroundSize: '50% 100%',
             backgroundPosition: 'right',
             backgroundRepeat: 'no-repeat',
@@ -56,7 +55,15 @@ const Banner = ({ color, options, image, menu, linearGradient, transparent, rhom
               <GridIcons options={options} />
             </div>
             <div className='tag-wrap relative'>
-              <Rhombus rhombusConfig={rhombusConfig} imageRhombus={imageRhombus} setImageRhombus={setImageRhombus} colorRhombus={colorRhombus} />
+              {rhombusConfig.map((config, key) => (
+                <Rhombus 
+                  key={key} 
+                  config={config} 
+                  imageRhombus={imageRhombus} 
+                  setImageRhombus={setImageRhombus} 
+                  colorRhombus={colorRhombus}
+                />
+              ))}
             </div>
           </div>
         </div>

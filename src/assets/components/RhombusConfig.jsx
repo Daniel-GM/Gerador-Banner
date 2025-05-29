@@ -1,49 +1,19 @@
+import Rhombus from "./Rhombus"
+
 const RhombusConfig = ({ rhombusConfig, imageRhombus, setImageRhombus, setPosition, setSize, setMode, colorRhombus }) => {
 
   return (
     <>
       {rhombusConfig.map((config, key) => (
         <div key={key} className="border-gray-700 border-2 p-1 md:p-2 rounded-lg bg-gray-900 grid grid-cols-1 md:grid-cols-2 justify-items-center items-center gap-4">
-          <div
+          <Rhombus 
             key={key}
-            className={`rhombus flex items-center justify-center`}
-            style={{
-              background: colorRhombus,
-              top: key,
-              left: config.left,
-              width: config.sizeFather,
-              height: config.sizeFather
-            }}
-          >
-            <input
-              id={config.id}
-              type="file"
-              className="hidden"
-              onChange={(e) => setImageRhombus(e, config.id)}
-            />
-            <div
-              onClick={() => document.getElementById(config.id).click()}
-              className={`rhombus relative cursor-pointer`}
-              style={{
-                backgroundImage: imageRhombus[config.id]
-                  ? `url(${imageRhombus[config.id]})`
-                  : "none",
-                backgroundSize: config.sizeImage,
-                backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
-                width: config.sizeChildren,
-                height: config.sizeChildren,
-                backgroundPositionX: config.positionX,
-                backgroundPositionY: config.positionY,
-              }}
-            >
-              {!imageRhombus[config.id] && (
-                <span className="absolute inset-0 flex items-center justify-center text-gray-500 text-center">
-                  Adicione uma imagem
-                </span>
-              )}
-            </div>
-          </div>
+            config={config}
+            imageRhombus={imageRhombus}
+            setImageRhombus={setImageRhombus}
+            colorRhombus={colorRhombus}
+            layout={"config"}
+          />
 
           <div className="flex flex-col justify-center gap-4 items-center w-full p-2">
             <div className="flex flex-col items-center gap-2 bg-gray-950/50 w-full p-4 rounded-lg border-2 border-gray-700">

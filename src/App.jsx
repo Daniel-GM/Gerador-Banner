@@ -8,38 +8,38 @@ import SelectLogo from './assets/components/SelectLogo'
 import TransparentGradient from './assets/components/TransparentGradient'
 import RhombusConfig from './assets/components/RhombusConfig'
 import ChangeColor from './assets/components/ChangeColor'
+import SelectPositionGradient from './assets/components/SelectPositionGradient'
 
 function App() {
+  // constants and states
   const maxLength = 36
   const [color, setColor] = useState('#097269')
   const [selectedImage, setSelectedImage] = useState(null)
   const [linearGradient, setLinearGradient] = useState('#ffffff')
   const [transparentGradient, setTransparentGradient] = useState('80')
   const [logoMenu, setLogoMenu] = useState('./menu-w.png')
-
   const [iconOptions, setIconOptions] = useState([
     { id: 1, icon: '', text: '', sugestion: "Ex: Pizza" },
     { id: 2, icon: '', text: '', sugestion: "Ex: Refrigerante" },
     { id: 3, icon: '', text: '', sugestion: "Ex: @SeuInstagram" },
     { id: 4, icon: '', text: '', sugestion: "Ex: Local do restaurante" }
   ])
-
   const [rhombusArray, setRhombusArray] = useState([
     { id: 'rhombus1', top: '0px', left: '65px', sizeFather: '10rem', sizeChildren: '9rem', positionX: '50%', positionY: '50%', sizeImage: 'cover', mode: 'cover' },
     { id: 'rhombus2', top: '130px', left: '-8px', sizeFather: '11rem', sizeChildren: '10rem', positionX: '50%', positionY: '50%', sizeImage: 'cover', mode: 'cover' },
     { id: 'rhombus3', top: '20px', left: '180px', sizeFather: '18rem', sizeChildren: '16rem', positionX: '50%', positionY: '50%', sizeImage: 'cover', mode: 'cover' },
     { id: 'rhombus4', top: '175px', left: '415px', sizeFather: '9rem', sizeChildren: '8rem', positionX: '50%', positionY: '50%', sizeImage: 'cover', mode: 'cover' }
   ])
-
   const [imageRhombus, setImageRhombus] = useState({
     rhombus1: null,
     rhombus2: null,
     rhombus3: null,
     rhombus4: null,
   })
-
   const [colorRhombus, setColorRhombus] = useState('#ffffff')
+  const [positionGradient, setPositionGradient] = useState('to top')
 
+  // handlers
   const handleColorRhombusChange = (newColor) => {
     setColorRhombus(newColor)
   }
@@ -149,7 +149,7 @@ function App() {
         <div className="grid grid-cols-1 h-full">
           {/* Banner */}
           <div className="space-y-4 bg-gray-800/50 p-6 border-gray-700 border-2 rounded-lg shadow-sm mt-6 grid justify-center items-center">
-            <Banner color={color} options={iconOptions} image={selectedImage} menu={logoMenu} linearGradient={linearGradient} transparent={transparentGradient} rhombusConfig={rhombusArray} imageRhombus={imageRhombus} setImageRhombus={handleImageRhombusChange} colorRhombus={colorRhombus} />
+            <Banner color={color} options={iconOptions} image={selectedImage} menu={logoMenu} linearGradient={linearGradient} transparent={transparentGradient} rhombusConfig={rhombusArray} imageRhombus={imageRhombus} setImageRhombus={handleImageRhombusChange} colorRhombus={colorRhombus} positionGradient={positionGradient} />
             <button
               children="Baixar Banner"
               className="bg-emerald-600 text-white p-4 rounded-lg mt-6"
@@ -180,14 +180,15 @@ function App() {
               {/* Right */}
               <div className="flex flex-col bg-gray-900/50 p-6 border-gray-700 border-2 rounded-lg gap-6">
                 {/* Color title, logo menu (sigesis) and Linear gradient */}
-                {[0, 1].map((rowIndex) => (
+                {[0, 1, 2].map((rowIndex) => (
                   <div key={rowIndex} className="flex flex-col md:flex-row mb-4 gap-6">
                     {[
                       <ChangeColor color={color} setColor={handleColorMenuChange} label={"Cor do Cardápio"} />,
                       <SelectLogo onChange={(image) => setLogoMenu(image)} />,
                       <ChangeColor color={linearGradient} setColor={handleGradientChange} label={"Cor do Gradiente"} />,
-                      <TransparentGradient transparent={transparentGradient} setTransparent={handleTransparentGradientChange} />
-
+                      <TransparentGradient transparent={transparentGradient} setTransparent={handleTransparentGradientChange} />,
+                      <SelectPositionGradient position={positionGradient} setPosition={setPositionGradient} label={"Posição do Gradiente"} />,
+                      <ChangeColor color={colorRhombus} setColor={handleColorRhombusChange} label={"Borda dos Losangos"} />,
                     ].slice(rowIndex * 2, rowIndex * 2 + 2).map((component, index) => (
                       <div key={index} className='flex flex-col w-full gap-2'>
                         {component}
@@ -235,11 +236,7 @@ function App() {
               <div className="md:space-y-4 space-y-1 grid grid-cols-1 bg-gray-900/50 md:p-6 p-3 border-gray-700 border-2 rounded-lg">
                 <h1 className="text-3xl text-white font-semibold">Configuração dos losangos</h1>
                 <div className='grid grid-cols-1 gap-4'>
-                  <div className="border-gray-700 border-2 p-1 md:p-2 rounded-lg bg-gray-900 grid grid-cols-1 md:grid-cols-2 justify-items-center items-center gap-4">
-                    <div className='flex flex-col items-center w-full gap-2'>
-                      <ChangeColor color={colorRhombus} setColor={handleColorRhombusChange} label={"Cor do Losango"} />
-                    </div>
-                  </div>
+                  
                 </div>
                 <div className='grid grid-cols-1 xl:grid-cols-2 gap-4'>
                   <RhombusConfig rhombusConfig={rhombusArray} imageRhombus={imageRhombus} setImageRhombus={handleImageRhombusChange} setPosition={handlePositionChange} setSize={handleSizeImageChange} setMode={handleModeChange} colorRhombus={colorRhombus} />
