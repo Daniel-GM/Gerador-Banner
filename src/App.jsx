@@ -182,7 +182,7 @@ function App() {
           {/* Config */}
           <div className="space-y-4 bg-gray-800/50 md:p-6 p-3 border-gray-700 border-2 rounded-lg shadow-sm mt-6">
             <h1 className="text-3xl text-white font-semibold">Configurações</h1>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {/* Left */}
               <div className="space-y-4 grid grid-cols-1 bg-gray-900/50 p-6 border-gray-700 border-2 rounded-lg">
                 {[0, 1].map((rowIndex) => (
