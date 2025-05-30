@@ -72,9 +72,11 @@ function App() {
     setRhombusArray(updated)
   }
 
-  const handlePositionChange = (index, newX, newY) => {
+  const handlePositionChange = (index, newPosition, direction) => {
     const updated = rhombusArray.map((item) =>
-      item.id === index ? { ...item, positionX: newX, positionY: newY } : item
+      (direction === 'x') 
+      ? item.id === index ? { ...item, positionX: newPosition } : item
+      : item.id === index ? { ...item, positionY: newPosition } : item
     )
     setRhombusArray(updated)
   }
