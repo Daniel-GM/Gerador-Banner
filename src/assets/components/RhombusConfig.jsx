@@ -63,7 +63,7 @@ const RhombusConfig = ({ rhombusConfig, imageRhombus, setImageRhombus, setPositi
                 setMode(config.id, { mode: "cover", sizeImage: "cover" })
               }}
             >
-              Reset
+              Resetar imagens
             </button>
           </div>
         </div>

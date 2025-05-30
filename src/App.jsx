@@ -74,9 +74,9 @@ function App() {
 
   const handlePositionChange = (index, newPosition, direction) => {
     const updated = rhombusArray.map((item) =>
-      (direction === 'x') 
-      ? item.id === index ? { ...item, positionX: newPosition } : item
-      : item.id === index ? { ...item, positionY: newPosition } : item
+      (direction === 'x')
+        ? item.id === index ? { ...item, positionX: newPosition } : item
+        : item.id === index ? { ...item, positionY: newPosition } : item
     )
     setRhombusArray(updated)
   }
@@ -237,6 +237,22 @@ function App() {
                     <InputRange value={positionBackground.position} setValue={handlePositionBackgroundChange} min={0} max={100} mode={"%"} label={"Posição X"} />
                   </div>
                 </div>
+
+                <button
+                  className="text-white bg-red-500 hover:bg-red-600 p-1 w-full rounded-lg"
+                  onClick={() => {
+                    handleColorMenuChange('#097269')
+                    setLogoMenu('./menu-w.png')
+                    handleGradientChange('#ffffff')
+                    handleTransparentGradientChange(128)
+                    setPositionGradient('to top')
+                    handleColorRhombusChange('#ffffff')
+                    handleSizeBackgroundChange(0)
+                    handlePositionBackgroundChange(0)
+                  }}
+                >
+                  Resetar Configurações
+                </button>
               </div>
             </div>
             <div className="grid grid-cols-1 md:gap-8 gap-4">
