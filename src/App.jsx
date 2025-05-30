@@ -5,7 +5,6 @@ import Banner from './assets/components/Banner'
 import IconOptions from './assets/components/IconOptions'
 import { toPng } from 'html-to-image'
 import SelectLogo from './assets/components/SelectLogo'
-import TransparentGradient from './assets/components/TransparentGradient'
 import RhombusConfig from './assets/components/RhombusConfig'
 import ChangeColor from './assets/components/ChangeColor'
 import SelectPositionGradient from './assets/components/SelectPositionGradient'
@@ -105,8 +104,15 @@ function App() {
   const handleImageChange = (e) => {
     const file = e.target.files[0]
     if (file) {
-      const imageUrl = URL.createObjectURL(file)
-      setSelectedImage(imageUrl)
+      console.log("Tipo de arquivo:", file.type)
+      if (file.type.startsWith('image/')) {
+
+        const imageUrl = URL.createObjectURL(file)
+        setSelectedImage(imageUrl)
+      } else {
+        alert('Por favor, selecione um arquivo de imagem (ex.: .jpg, .png).')
+        setSelectedImage(null)
+      }
     }
   }
 

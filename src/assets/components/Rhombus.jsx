@@ -4,9 +4,9 @@ const Rhombus = ({ config, imageRhombus, setImageRhombus, colorRhombus, layout =
 
   return (
     <div
-      className={layout === "default" 
-        ? `rhombus absolute flex items-center justify-center` 
-        : `rhombus flex items-center justify-center` 
+      className={layout === "default"
+        ? `rhombus absolute flex items-center justify-center`
+        : `rhombus flex items-center justify-center`
       }
       style={{
         background: colorRhombus,
@@ -19,6 +19,7 @@ const Rhombus = ({ config, imageRhombus, setImageRhombus, colorRhombus, layout =
       <input
         id={config.id}
         type="file"
+        accept="image/*"
         className="hidden"
         onChange={(e) => setImageRhombus(e, config.id)}
       />
