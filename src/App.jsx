@@ -9,6 +9,8 @@ import RhombusConfig from './assets/components/RhombusConfig'
 import ChangeColor from './assets/components/ChangeColor'
 import SelectPositionGradient from './assets/components/SelectPositionGradient'
 import InputRange from './assets/components/InputRange'
+import { Download, Upload, RotateCcw } from "lucide-react"
+import Button from './assets/components/Button'
 
 function App() {
   // constants and states
@@ -165,6 +167,89 @@ function App() {
     setColor(newColor)
   }
 
+  const handleClickImport = () => {
+    const fileInputRef = document.getElementById('importData')
+    fileInputRef.click()
+  };
+
+  const handleResetConfigurations = () => {
+    if (window.confirm('Você realmente deseja resetar as configurações?')) {
+      handleColorMenuChange('#097269')
+      setLogoMenu('./menu-w.png')
+      handleGradientChange('#ffffff')
+      handleTransparentGradientChange(128)
+      setPositionGradient('to top')
+      handleColorRhombusChange('#ffffff')
+      handleSizeBackgroundChange(0)
+      handlePositionBackgroundChange(0)
+    }
+  }
+
+  const handleImportConfigurations = async () => {
+    const fileInput = document.getElementById('importData')
+    const file = fileInput.files[0]
+    const data = await file.text()
+    try {
+      const configurations = JSON.parse(data)
+
+      handleColorMenuChange(configurations.color || '#097269')
+      setLogoMenu(configurations.logoMenu || './menu-w.png')
+      handleGradientChange(configurations.linearGradient || '#ffffff')
+      handleTransparentGradientChange(configurations.transparentGradient || '80')
+      setPositionGradient(configurations.positionGradient || 'to top')
+      handleColorRhombusChange(configurations.colorRhombus || '#ffffff')
+      handleSizeBackgroundChange(configurations.positionBackground.size || 0)
+      handlePositionBackgroundChange(configurations.positionBackground.position || 0)
+      setIconOptions(configurations.iconOptions || [
+        { id: 1, icon: '', text: '', sugestion: "Ex: Pizza" },
+        { id: 2, icon: '', text: '', sugestion: "Ex: Refrigerante" },
+        { id: 3, icon: '', text: '', sugestion: "Ex: @SeuInstagram" },
+        { id: 4, icon: '', text: '', sugestion: "Ex: Local do restaurante" }
+      ])
+      setRhombusArray(configurations.rhombusArray || [
+        { id: 'rhombus1', top: '0px', left: '65px', sizeFather: '10rem', sizeChildren: '9rem', positionX: '50%', positionY: '50%', sizeImage: 'cover', mode: 'cover' },
+        { id: 'rhombus2', top: '130px', left: '-8px', sizeFather: '11rem', sizeChildren: '10rem', positionX: '50%', positionY: '50%', sizeImage: 'cover', mode: 'cover' },
+        { id: 'rhombus3', top: '20px', left: '180px', sizeFather: '18rem', sizeChildren: '16rem', positionX: '50%', positionY: '50%', sizeImage: 'cover', mode: 'cover' },
+        { id: 'rhombus4', top: '175px', left: '415px', sizeFather: '9rem', sizeChildren: '8rem', positionX: '50%', positionY: '50%', sizeImage: 'cover', mode: 'cover' }
+      ])
+      setImageRhombus(configurations.imageRhombus || {
+        rhombus1: null,
+        rhombus2: null,
+        rhombus3: null,
+        rhombus4: null,
+      })
+      alert('Configurações importadas com sucesso!')
+    } catch (error) {
+      console.error('Erro ao importar configurações: ', error)
+      alert('Erro ao importar configurações. Verifique o formato do arquivo JSON.')
+    }
+  }
+
+  const handleExportConfigurations = () => {
+    const date = new Date()
+
+    const configurations = {
+      color,
+      logoMenu,
+      linearGradient,
+      transparentGradient,
+      positionGradient,
+      positionBackground,
+      iconOptions,
+      rhombusArray,
+      imageRhombus,
+      colorRhombus
+    }
+
+    const blob = new Blob([JSON.stringify(configurations, null, 2)], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `banner_configurations_${date.getDate()}_${date.getMonth() + 1}_${date.getHours()}_${date.getMinutes()}_${date.getSeconds()}.json`
+    link.click()
+    URL.revokeObjectURL(url)
+  }
+
   return (
     <div className="min-h-screen bg-gray-900 h-full">
       <div className="container mx-auto p-6 h-full md:w-auto w-full">
@@ -177,6 +262,11 @@ function App() {
               className="bg-emerald-600 text-white p-4 rounded-lg mt-6"
               onClick={handleDownload}
             />
+            <div className='flex flex-col md:flex-row gap-4'>
+              <Button color={"emerald"} action={handleClickImport} label={"Importar"} icon={<Download className='w-4' />} />
+              <Button color={"blue"} action={handleExportConfigurations} label={"Exportar"} icon={<Upload className='w-4' />} />
+            </div>
+            <input id="importData" type="file" accept=".json" onChange={handleImportConfigurations} className="hidden" />
           </div>
 
           {/* Config */}
@@ -243,22 +333,10 @@ function App() {
                     <InputRange value={positionBackground.position} setValue={handlePositionBackgroundChange} min={0} max={100} mode={"%"} label={"Posição X"} />
                   </div>
                 </div>
-
-                <button
-                  className="text-white bg-red-500 hover:bg-red-600 p-1 w-full rounded-lg"
-                  onClick={() => {
-                    handleColorMenuChange('#097269')
-                    setLogoMenu('./menu-w.png')
-                    handleGradientChange('#ffffff')
-                    handleTransparentGradientChange(128)
-                    setPositionGradient('to top')
-                    handleColorRhombusChange('#ffffff')
-                    handleSizeBackgroundChange(0)
-                    handlePositionBackgroundChange(0)
-                  }}
-                >
-                  Resetar Configurações
-                </button>
+                {/* reset, import and export */}
+                <div className='flex flex-col gap-4'>
+                  <Button color={"red"} action={handleResetConfigurations} label={"Reset"} icon={<RotateCcw className='w-4' />} />
+                </div>
               </div>
             </div>
             <div className="grid grid-cols-1 md:gap-8 gap-4">
