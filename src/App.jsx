@@ -195,7 +195,7 @@ function App() {
       handleColorMenuChange(configurations.color || '#097269')
       setLogoMenu(configurations.logoMenu || './menu-w.png')
       handleGradientChange(configurations.linearGradient || '#ffffff')
-      handleTransparentGradientChange(configurations.transparentGradient || '80')
+      handleTransparentGradientChange(parseInt(configurations.transparentGradient, 16) || '80')
       setPositionGradient(configurations.positionGradient || 'to top')
       handleColorRhombusChange(configurations.colorRhombus || '#ffffff')
       handleSizeBackgroundChange(configurations.positionBackground.size || 0)
