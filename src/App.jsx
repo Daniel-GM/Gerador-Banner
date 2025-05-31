@@ -1,5 +1,7 @@
+// css
 import './index.css'
 
+// imports
 import { useState } from 'react'
 import Banner from './assets/components/Banner'
 import IconOptions from './assets/components/IconOptions'
@@ -212,12 +214,6 @@ function App() {
         { id: 'rhombus3', top: '20px', left: '180px', sizeFather: '18rem', sizeChildren: '16rem', positionX: '50%', positionY: '50%', sizeImage: 'cover', mode: 'cover' },
         { id: 'rhombus4', top: '175px', left: '415px', sizeFather: '9rem', sizeChildren: '8rem', positionX: '50%', positionY: '50%', sizeImage: 'cover', mode: 'cover' }
       ])
-      setImageRhombus(configurations.imageRhombus || {
-        rhombus1: null,
-        rhombus2: null,
-        rhombus3: null,
-        rhombus4: null,
-      })
       alert('Configurações importadas com sucesso!')
     } catch (error) {
       console.error('Erro ao importar configurações: ', error)
@@ -237,7 +233,6 @@ function App() {
       positionBackground,
       iconOptions,
       rhombusArray,
-      imageRhombus,
       colorRhombus
     }
 
